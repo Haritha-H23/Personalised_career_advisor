@@ -1,0 +1,21 @@
+.analysis {
+  padding: 60px;
+  background: #f3f4f6;
+  min-height: 90vh;
+}
+
+.progress {
+  margin-bottom: 25px;
+}
+
+.bar {
+  background: #ddd;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.fill {
+  background: #f59e0b;
+  height: 10px;
+  border-radius: 5px;
+}
