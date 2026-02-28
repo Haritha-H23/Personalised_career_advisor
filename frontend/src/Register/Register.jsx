@@ -1,46 +1,98 @@
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Register.css";
 
-function Register() {
+const Register = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/survey");
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:8080/api/auth/register", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      alert("Registration successful!");
+      navigate("/dashboard");
+    } catch (error) {
+      alert("Registration failed");
+    }
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
+    <div className="auth-container">
+      <div className="auth-card">
         <h2>Create Account</h2>
+        <p className="subtitle">Start your personalised career journey</p>
 
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <FaUser className="icon" />
-            <input type="text" placeholder="Full Name" required />
-          </div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            onChange={handleChange}
+            required
+          />
 
-          <div className="input-group">
-            <FaEnvelope className="icon" />
-            <input type="email" placeholder="Email" required />
-          </div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          />
 
-          <div className="input-group">
-            <FaLock className="icon" />
-            <input type="password" placeholder="Password" required />
-          </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          />
 
-          <button type="submit">Register</button>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            onChange={handleChange}
+            required
+          />
+
+          <button type="submit" className="auth-btn">
+            Create Account
+          </button>
         </form>
 
-        <p>
-          Already have an account?
-          <Link to="/"> Login</Link>
+        <p className="switch-text">
+          Already have an account?{" "}
+          <span onClick={() => navigate("/login")}>Sign In</span>
         </p>
       </div>
     </div>
   );
-}
+};
 
 export default Register;

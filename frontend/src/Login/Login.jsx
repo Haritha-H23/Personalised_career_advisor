@@ -1,41 +1,76 @@
-import { FaEnvelope, FaLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Login.css";
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/survey");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/login",
+        formData
+      );
+
+      localStorage.setItem("token", response.data.token);
+
+      alert("Login successful!");
+      navigate("/dashboard");
+    } catch (error) {
+      alert("Invalid email or password");
+    }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <h2>Welcome Back</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Sign In</h2>
+        <p className="subtitle">Login to continue</p>
 
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <FaEnvelope className="icon" />
-            <input type="email" placeholder="Email" required />
-          </div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          />
 
-          <div className="input-group">
-            <FaLock className="icon" />
-            <input type="password" placeholder="Password" required />
-          </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          />
 
-          <button type="submit">Login</button>
+          <button type="submit" className="auth-btn">
+            Login
+          </button>
         </form>
 
-        <p>
-          Don't have an account?
-          <Link to="/register"> Register</Link>
+        <p className="switch-text">
+          Don’t have an account?{" "}
+          <span onClick={() => navigate("/register")}>Register</span>
         </p>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
