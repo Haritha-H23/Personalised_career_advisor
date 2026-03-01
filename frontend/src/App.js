@@ -6,9 +6,9 @@ import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Dashboard from "./Dashboard/Dashboard";
 import Analysis from "./Analysis/Analysis";
-import Survey from "./Survey/Survey";
 
 import "./App.css";
+import Assessment from "./Assessment/Assessment";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/analysis" element={<Analysis />} />
-        <Route path="/survey" element={<Survey />} />
+        <Route path="/assessment" element={<Assessment />} />
       </Routes>
     </>
   );

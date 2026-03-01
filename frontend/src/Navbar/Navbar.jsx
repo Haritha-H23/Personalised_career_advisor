@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
+import { Compass } from "lucide-react";
 
 function Navbar() {
+  const navigate = useNavigate();
   return (
-    <nav className="navbar">
-      <div className="logo">CareerAdvisor</div>
-
-      <div className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/analysis">Analysis</Link>
-        <Link to="/survey">Survey</Link>
-        <Link to="/login" className="login-btn">Login</Link>
-      </div>
-    </nav>
+    <header className="main-header">
+        <div className="header-inner">
+          <div className="logo" onClick={() => navigate("/")}>
+            <Compass className="logo-icon" /> Career<span className="accent">Advisor</span>
+          </div>
+          <nav className="nav-menu">
+            <a href="/" className="nav-link">Home</a>
+            <a href="/dashboard" className="nav-link">Dashboard</a>
+            <a href="/dashboard" className="nav-link">Assesment</a>
+            <button className="login-pill" onClick={() => navigate("/login")}>
+              Sign In
+            </button>
+          </nav>
+        </div>
+      </header>
   );
 }
 

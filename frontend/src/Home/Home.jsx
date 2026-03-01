@@ -1,118 +1,108 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
+// Import classic icons
+import { BrainCircuit, Target, Zap, TrendingUp, Award, Users, Compass } from "lucide-react";
 
-function Home() {const navigate = useNavigate();
+function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className="home-container">
-
-      
-      <section className="hero">
-        <div className="hero-content">
-          <h1>
-            Your Career, <span>Personalised</span>
-          </h1>
-          <p>
-            Get AI-driven career guidance, connect with alumni,
-            prepare for certifications, and chart your path to success.
-          </p>
-          <div className="hero-buttons">
-  <button
-              className="primary-btn"
-              onClick={() => navigate("/survey")}
-            >
-              Get Started →
-            </button>
-
-            <button
-              className="secondary-btn"
-              onClick={() => navigate("/login")}
-            >
+      {/* HEADER: Sticky Style */}
+      <header className="main-header">
+        <div className="header-inner">
+          <div className="logo" onClick={() => navigate("/")}>
+            <Compass className="logo-icon" /> Career<span className="accent">Advisor</span>
+          </div>
+          <nav className="nav-menu">
+            <a href="#features" className="nav-link">Home</a>
+            <a href="/dashboard" className="nav-link">Dashboard</a>
+            <a href="/assessment" className="nav-link">Assessment</a>
+            <button className="login-pill" onClick={() => navigate("/login")}>
               Sign In
             </button>
-</div>
+          </nav>
+        </div>
+      </header>
+
+      {/* HERO SECTION */}
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-badge">AI-Powered Career Guidance Platform</div>
+          <h1>
+            Discover Your <br />
+            <span className="gradient-text">Perfect Career</span>
+          </h1>
+          <p className="hero-subtitle">
+            Take a structured assessment, let AI analyze your strengths, and unlock 
+            a personalized career roadmap with certifications, courses, and live 
+            opportunities.
+          </p>
+          <div className="hero-buttons">
+            <button className="btn-primary large" onClick={() => navigate("/register")}>
+              Start Free Assessment
+            </button>
+            <button className="btn-outline" onClick={() => navigate("/login")}>
+              Sign In
+            </button>
+          </div>
+          <div className="hero-stats">
+            <span>25 Aptitude Questions</span>
+            <span>10 Interest Scenarios</span>
+            <span>6 Career Domains</span>
+          </div>
         </div>
       </section>
 
-      <section className="features">
-        <h2>Everything You Need to Succeed</h2>
-        <p className="features-subtext">
-          Our platform combines AI analysis, expert networks, and structured learning paths.
-        </p>
+      {/* FEATURES SECTION */}
+      <section id="features" className="features">
+        <div className="section-header">
+          <h2>Your Career Ecosystem</h2>
+          <p>More than a survey — a complete AI-powered platform for career discovery.</p>
+        </div>
 
         <div className="feature-grid">
-          <div className="feature-card">
-            <h3>Career Analysis</h3>
-            <p>AI-powered insights into your career trajectory and growth areas.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Alumni Network</h3>
-            <p>Connect with alumni who've walked the path you aspire to.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Exam Prep</h3>
-            <p>Tailored study plans and resources for certification exams.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Certifications</h3>
-            <p>Discover the certifications that matter most for your goals.</p>
-          </div>
+          {[
+            { icon: BrainCircuit, title: "Aptitude Assessment", desc: "25 objective MCQs across 5 cognitive domains" },
+            { icon: Target, title: "Interest Profiling", desc: "10 scenario-based questions mapping your passions" },
+            { icon: Zap, title: "AI Career Match", desc: "Smart recommendations based on your unique profile" },
+            { icon: TrendingUp, title: "Growth Roadmap", desc: "Certifications, courses, and skill gap analysis" },
+            { icon: Award, title: "Live Opportunities", desc: "Jobs, hackathons, and events tailored for you" },
+            { icon: Users, title: "Alumni Network", desc: "Connect with professionals in your matched field" },
+          ].map((feature, index) => (
+            <div className="feature-card" key={index}>
+              <div className="icon-wrapper">
+                <feature.icon size={32} strokeWidth={1.5} />
+              </div>
+              <h3>{feature.title}</h3>
+              <p>{feature.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA SECTION */}
       <section className="cta">
-        <div className="cta-content">
-          <h2>
-            Ready to <span>Shape Your Future?</span>
-          </h2>
-          <p>
-            Join thousands of professionals who’ve accelerated their careers
-            with personalised AI-driven guidance.
-          </p>
-          <button className="cta-btn">
-            Take the Career Survey →
+        <div className="cta-card">
+          <h2>Ready to Find Your Path?</h2>
+          <p>Join thousands of students who discovered their ideal career through CareerAdvisor’s AI-powered assessment.</p>
+          <button className="btn-primary large" onClick={() => navigate("/assessment")}>
+            Take the Assessment Now
           </button>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-brand">
-            <h3>
-              Career<span>Advisor</span>
-            </h3>
-            <p>
-              AI-powered career guidance to help you grow,
-              connect, and succeed.
-            </p>
-          </div>
-
-          <div className="footer-links">
-            <div>
-             <a href="/dashboard">Dashboard</a>
-             <a href="/alumini">Alumni</a>
-             <a href="/certifications">Certifications</a>
-             <a href="/exams">Exams</a>
-            </div>
-
-            <div>
-              <h4>Company</h4>
-              <a href="/about">About</a>
-              <a href="/contact">Contact</a>
-              <a href="/privacy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
-
+      <footer className="main-footer">
         <div className="footer-bottom">
-          © {new Date().getFullYear()} CareerAdvisor. All rights reserved.
+          <div className="footer-bottom-inner">
+            <div className="logo">
+              <Compass className="logo-icon" /> Career<span className="accent">Advisor</span>
+            </div>
+            <p>&copy; {new Date().getFullYear()} CareerAdvisor. AI-Powered Career Guidance.</p>
+          </div>
         </div>
       </footer>
-
     </div>
   );
 }

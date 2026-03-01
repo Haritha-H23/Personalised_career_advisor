@@ -23,11 +23,13 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/login",
+        "http://localhost:8080/auth/login",
         formData
       );
 
+      console.log(response.data);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userId", response.data.id); 
 
       alert("Login successful!");
       navigate("/dashboard");
@@ -39,34 +41,48 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>Sign In</h2>
-        <p className="subtitle">Login to continue</p>
+        
+        
+        <h2>Welcome Back!</h2>
+        <p className="subtitle">Enter your credentials to access your account</p>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="name@company.com"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
           <button type="submit" className="auth-btn">
-            Login
+            Sign In
           </button>
         </form>
 
+        <div className="divider">
+          <span>or</span>
+        </div>
+
         <p className="switch-text">
           Don’t have an account?{" "}
-          <span onClick={() => navigate("/register")}>Register</span>
+          <span onClick={() => navigate("/register")}>Sign Up</span>
         </p>
       </div>
     </div>
