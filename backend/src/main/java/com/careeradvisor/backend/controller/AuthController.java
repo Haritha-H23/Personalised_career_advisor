@@ -44,7 +44,8 @@ public ResponseEntity<?> login(@RequestBody User user) {
         return ResponseEntity.ok().body(Map.of(
                 "token", token,
                 "email", dbUser.getEmail(),
-                "name", dbUser.getName()
+                "name", dbUser.getName(),
+                "id", dbUser.getId()  
         ));
     }
 
