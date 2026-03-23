@@ -46,11 +46,6 @@ function Home() {
               Sign In
             </button>
           </div>
-          <div className="hero-stats">
-            <span>25 Aptitude Questions</span>
-            <span>10 Interest Scenarios</span>
-            <span>6 Career Domains</span>
-          </div>
         </div>
       </section>
 

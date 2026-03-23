@@ -1,0 +1,36 @@
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--bg-hero);
+  color: white;
+}
+
+.loading-box {
+  text-align: center;
+}
+
+.icon {
+  font-size: 70px;
+  margin-bottom: 20px;
+  color: #38bdf8;
+  animation: spin 2s linear infinite;
+}
+
+.text {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* smooth spinning animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaBrain, FaHeart, FaArrowRight, FaArrowLeft } from "react-icons/fa"; // Imported icons
 import "./Assessment.css";
+import { useNavigate } from "react-router-dom";
 
 const Assessment = () => {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -39,29 +41,42 @@ const Assessment = () => {
   };
 
   const handleSubmit = async () => {
-    const userId = localStorage.getItem("userId");
-    const formattedAnswers = Object.keys(answers).map((qId) => ({
-      userId: userId,
-      questionId: qId,
-      selectedAnswer: answers[qId]
-    }));
+  const userId = localStorage.getItem("userId");
 
-    try {
-        const token = localStorage.getItem("token");
-      await axios.post(
-  `http://localhost:8080/assessment/submit/${userId}`,
-  formattedAnswers,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+  const formattedAnswers = Object.keys(answers).map((qId) => ({
+    userId: userId,
+    questionId: qId,
+    selectedAnswer: answers[qId]
+  }));
+
+  try {
+    const token = localStorage.getItem("token");
+
+    // ✅ STORE RESPONSE
+    const res = await axios.post(
+      `http://localhost:8080/assessment/submit/${userId}`,
+      formattedAnswers,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    // 👉 Go to loading screen
+    navigate("/loading");
+
+    // 👉 After 5 sec → go to dashboard with data
+    setTimeout(() => {
+      navigate("/dashboard", { state: res.data });
+    }, 5000);
+
+    localStorage.setItem("assessmentCompleted", "true");
+    localStorage.setItem("result", JSON.stringify(res.data));
+  } catch (error) {
+    console.error("Submission failed", error);
   }
-);
-      alert("Assessment Submitted Successfully!");
-    } catch (error) {
-      console.error("Submission failed", error);
-    }
-  };
+};
 
   if (questions.length === 0) return <div className="loading">Loading...</div>;
 

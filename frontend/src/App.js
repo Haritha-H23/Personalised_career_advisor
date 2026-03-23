@@ -9,6 +9,7 @@ import Analysis from "./Analysis/Analysis";
 
 import "./App.css";
 import Assessment from "./Assessment/Assessment";
+import LoadingScreen from "./Dashboard/LoadingScreen";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/loading" element={<LoadingScreen />} />
         <Route path="/analysis" element={<Analysis />} />
         <Route path="/assessment" element={<Assessment />} />
       </Routes>
