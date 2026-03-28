@@ -41,6 +41,10 @@ const Assessment = () => {
   };
 
   const handleSubmit = async () => {
+  if (Object.keys(answers).length < questions.length) {
+    alert("Please answer all questions before submitting.");
+    return;
+  }
   const userId = localStorage.getItem("userId");
 
   const formattedAnswers = Object.keys(answers).map((qId) => ({

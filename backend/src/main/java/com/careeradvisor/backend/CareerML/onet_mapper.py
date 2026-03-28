@@ -89,7 +89,7 @@ def refine_career(title, cluster):
         return "Teacher"
     elif "doctor" in t or "physician" in t:
         return "Doctor"
-    elif "nurse" in t:
+    elif "nurse" in t and "nursery" not in t:
         return "Nurse"
     elif "manager" in t:
         return "Manager"

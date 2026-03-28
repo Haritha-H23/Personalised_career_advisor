@@ -32,7 +32,7 @@ public class AssessmentScoreService {
 
             Question question = questionRepository
                     .findById(ans.getQuestionId())
-                    .orElseThrow();
+                    .orElseThrow(() -> new RuntimeException("Question not found: " + ans.getQuestionId()));
 
             if (question.getType().equals("APTITUDE")) {
 

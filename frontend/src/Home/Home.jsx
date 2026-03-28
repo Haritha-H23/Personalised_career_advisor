@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { BrainCircuit, Target, Zap, TrendingUp, Award, Users, Compass } from "lucide-react";
 
 function Home() {
-  const navigate = useNavigate();
+  const navigate  = useNavigate();
+  const token     = localStorage.getItem("token");
+  const isLoggedIn = !!token;
 
   return (
     <div className="home-container">
@@ -16,11 +18,16 @@ function Home() {
           </div>
           <nav className="nav-menu">
             <a href="#features" className="nav-link">Home</a>
-            <a href="/dashboard" className="nav-link">Dashboard</a>
-            <a href="/assessment" className="nav-link">Assessment</a>
-            <button className="login-pill" onClick={() => navigate("/login")}>
-              Sign In
-            </button>
+            {isLoggedIn ? (
+              <>
+                <a href="/dashboard" className="nav-link">Dashboard</a>
+                <a href="/assessment" className="nav-link">Assessment</a>
+              </>
+            ) : (
+              <button className="login-pill" onClick={() => navigate("/login")}>
+                Sign In
+              </button>
+            )}
           </nav>
         </div>
       </header>
@@ -39,12 +46,20 @@ function Home() {
             opportunities.
           </p>
           <div className="hero-buttons">
-            <button className="btn-primary large" onClick={() => navigate("/register")}>
-              Start Free Assessment
-            </button>
-            <button className="btn-outline" onClick={() => navigate("/login")}>
-              Sign In
-            </button>
+            {isLoggedIn ? (
+              <button className="btn-primary large" onClick={() => navigate("/assessment")}>
+                Take Assessment
+              </button>
+            ) : (
+              <>
+                <button className="btn-primary large" onClick={() => navigate("/register")}>
+                  Start Free Assessment
+                </button>
+                <button className="btn-outline" onClick={() => navigate("/login")}>
+                  Sign In
+                </button>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -81,8 +96,8 @@ function Home() {
         <div className="cta-card">
           <h2>Ready to Find Your Path?</h2>
           <p>Join thousands of students who discovered their ideal career through CareerAdvisor’s AI-powered assessment.</p>
-          <button className="btn-primary large" onClick={() => navigate("/assessment")}>
-            Take the Assessment Now
+          <button className="btn-primary large" onClick={() => navigate(isLoggedIn ? "/assessment" : "/register")}>
+            {isLoggedIn ? "Take the Assessment Now" : "Get Started Free"}
           </button>
         </div>
       </section>

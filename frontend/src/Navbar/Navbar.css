@@ -1,28 +1,44 @@
-.navbar {
+.user-menu {
   display: flex;
-  justify-content: space-between;
-  padding: 18px 60px;
-  background: white;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  gap: 10px;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: #1b2a4e;
-}
-
-.nav-links a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #333;
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  font-size: 0.875rem;
   font-weight: 500;
+  color: var(--text-main);
 }
 
-.login-btn {
-  background: #f59e0b;
+.logout-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 18px;
-  border-radius: 6px;
-  color: white !important;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: transparent;
+  color: var(--text-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-pill:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+.active-link {
+  color: var(--primary) !important;
+  font-weight: 600;
 }

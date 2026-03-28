@@ -1,3 +1,118 @@
-h2 {
-  color: #1e3a8a;
+.alumni-page {
+  padding: 120px 24px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg-main);
+}
+
+.alumni-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-main);
+}
+
+.alumni-sub {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.career-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: var(--primary);
+  color: #000;
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.talks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.talk-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s;
+}
+
+.talk-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.talk-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.talk-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.talk-role {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.talk-topic {
+  font-size: 13px;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.watch-btn {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.loading-text,
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 40px;
 }

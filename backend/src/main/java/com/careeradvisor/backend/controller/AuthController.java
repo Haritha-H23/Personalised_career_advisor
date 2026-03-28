@@ -38,18 +38,16 @@ public ResponseEntity<?> login(@RequestBody User user) {
             .orElseThrow(() -> new RuntimeException("User not found"));
 
     if (encoder.matches(user.getPassword(), dbUser.getPassword())) {
-
         String token = jwtUtil.generateToken(user.getEmail());
-
         return ResponseEntity.ok().body(Map.of(
                 "token", token,
                 "email", dbUser.getEmail(),
                 "name", dbUser.getName(),
-                "id", dbUser.getId()  
+                "id", dbUser.getId()
         ));
     }
 
-    throw new RuntimeException("Invalid credentials");
+    return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
 }
 
 }
